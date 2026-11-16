@@ -1,0 +1,17 @@
+meta {
+  name: Chain 06 readback stateless
+  type: http
+  seq: 29
+}
+
+get {
+  url: {{base_url}}/api/users/{{new_user_id}}
+  body: none
+  auth: none
+}
+
+tests {
+  test("status 200", () => expect(res.getStatus()).to.equal(200));
+  test("nothing persisted (live semantics)", () => expect(res.getBody().data.first_name).to.equal("Eve"));
+  test("chain var still resolves", () => expect(res.getBody().data.id).to.equal(4));
+}
