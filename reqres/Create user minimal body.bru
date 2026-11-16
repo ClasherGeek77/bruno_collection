@@ -1,0 +1,25 @@
+meta {
+  name: Create user minimal body
+  type: http
+  seq: 22
+}
+
+post {
+  url: {{base_url}}/api/users
+  body: none
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {}
+}
+
+tests {
+  test("status 201", () => expect(res.getStatus()).to.equal(201));
+  const d = res.getBody(); test("id", () => expect(d.id).to.be.a("string"));
+  test("createdAt", () => expect(d.createdAt).to.be.a("string"));
+}

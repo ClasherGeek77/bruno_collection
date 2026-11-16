@@ -1,0 +1,27 @@
+meta {
+  name: Update unknown id
+  type: http
+  seq: 20
+}
+
+put {
+  url: {{base_url}}/api/users/23
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "nope",
+    "job": "ghost"
+  }
+}
+
+tests {
+  test("status 200", () => expect(res.getStatus()).to.equal(200));
+  test("updatedAt", () => expect(res.getBody().updatedAt).to.be.a("string"));
+}

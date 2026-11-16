@@ -1,0 +1,15 @@
+meta {
+  name: Delete unknown id
+  type: http
+  seq: 21
+}
+
+delete {
+  url: {{base_url}}/api/users/23
+  body: none
+  auth: none
+}
+
+tests {
+  test("status 204", () => expect(res.getStatus()).to.equal(204));
+}

@@ -1,0 +1,28 @@
+meta {
+  name: Create user
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{base_url}}/api/users
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "morpheus",
+    "job": "leader"
+  }
+}
+
+tests {
+  test("status 201", () => expect(res.getStatus()).to.equal(201));
+  test("has id", () => expect(res.getBody().id).to.be.a("string"));
+  test("has createdAt", () => expect(res.getBody().createdAt).to.be.a("string"));
+}

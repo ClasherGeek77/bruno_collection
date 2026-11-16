@@ -1,0 +1,16 @@
+meta {
+  name: Unknown filter returns empty
+  type: http
+  seq: 9
+}
+
+get {
+  url: {{base_url}}/api/users?unknown=1
+  body: none
+  auth: none
+}
+
+tests {
+  test("status 200", () => expect(res.getStatus()).to.equal(200));
+  test("empty data", () => expect(res.getBody().data.length).to.equal(0));
+}

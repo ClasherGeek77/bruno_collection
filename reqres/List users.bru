@@ -1,0 +1,17 @@
+meta {
+  name: List users
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{base_url}}/api/users?page=1
+  body: none
+  auth: none
+}
+
+tests {
+  test("status 200", () => expect(res.getStatus()).to.equal(200));
+  const d = res.getBody(); test("12 users", () => expect(d.total).to.equal(12));
+  test("6 per page", () => expect(d.data.length).to.equal(6));
+}

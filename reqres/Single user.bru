@@ -1,0 +1,16 @@
+meta {
+  name: Single user
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{base_url}}/api/users/2
+  body: none
+  auth: none
+}
+
+tests {
+  test("status 200", () => expect(res.getStatus()).to.equal(200));
+  test("janet", () => expect(res.getBody().data.first_name).to.equal("Janet"));
+}

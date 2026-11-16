@@ -1,0 +1,17 @@
+meta {
+  name: List users (user-list)
+  type: http
+  seq: 19
+}
+
+get {
+  url: {{base_url}}/api/user-list?delay=1
+  body: none
+  auth: none
+}
+
+tests {
+  test("status 200", () => expect(res.getStatus()).to.equal(200));
+  const d = res.getBody(); test("10 per page", () => expect(d.data.length).to.equal(10));
+  test("total 12", () => expect(d.total).to.equal(12));
+}
