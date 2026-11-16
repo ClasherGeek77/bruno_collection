@@ -1,0 +1,33 @@
+meta {
+  name: Chain 02 create
+  type: http
+  seq: 25
+}
+
+post {
+  url: {{base_url}}/api/users
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "{{plan_name}}",
+    "job": "{{plan_job}}"
+  }
+}
+
+script:post-response {
+  bru.setVar("new_user_id", res.getBody().id);
+}
+
+tests {
+  test("status 201", () => expect(res.getStatus()).to.equal(201));
+  test("job echoes plan", () => expect(res.getBody().job).to.equal("chain-leader"));
+  test("name echoes plan", () => expect(res.getBody().name).to.equal("chain-morpheus"));
+  test("id issued", () => expect(res.getBody().id).to.be.a("string"));
+}

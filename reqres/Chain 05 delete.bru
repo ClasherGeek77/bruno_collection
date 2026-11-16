@@ -1,0 +1,15 @@
+meta {
+  name: Chain 05 delete
+  type: http
+  seq: 28
+}
+
+delete {
+  url: {{base_url}}/api/users/{{new_user_id}}
+  body: none
+  auth: none
+}
+
+tests {
+  test("status 204", () => expect(res.getStatus()).to.equal(204));
+}

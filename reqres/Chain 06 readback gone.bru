@@ -1,0 +1,16 @@
+meta {
+  name: Chain 06 readback gone
+  type: http
+  seq: 29
+}
+
+get {
+  url: {{base_url}}/api/users/{{new_user_id}}
+  body: none
+  auth: none
+}
+
+tests {
+  test("status 404", () => expect(res.getStatus()).to.equal(404));
+  test("empty body", () => expect(Object.keys(res.getBody()).length).to.equal(0));
+}

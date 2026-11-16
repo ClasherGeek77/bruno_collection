@@ -1,0 +1,17 @@
+meta {
+  name: Chain 03 readback id
+  type: http
+  seq: 26
+}
+
+get {
+  url: {{base_url}}/api/users?page={{new_user_id}}
+  body: none
+  auth: none
+}
+
+tests {
+  test("status 200", () => expect(res.getStatus()).to.equal(200));
+  test("captured id resolved", () => expect(res.getBody().page).to.be.above(2));
+  test("clamped page empty", () => expect(res.getBody().data.length).to.equal(0));
+}
